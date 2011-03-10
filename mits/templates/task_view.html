@@ -1,0 +1,153 @@
+{% extends "base_gv.html" %}
+
+{% block title %}Task List{% endblock %}
+
+{% block nav %}
+		<li class="active"><a href="#">Track</a></li>
+		<li><a href="/celebrate/">Celebrate</a></li>
+		<li><a href="/contact/">Contact</a></li>
+		{% endblock %}
+
+{% block content %}
+        
+       
+    
+    {% if task %}
+             {% if form.errors %}
+        <p style="color: red;">
+            Please correct the error{{ form.errors|pluralize }} below.
+            
+            {% for error in form.errors%}
+            {{error}}
+            {%endfor%}
+            
+        </p>
+                {% endif %}
+                
+                {%if  task.completed1 and task.completed2 and task.completed3%}
+                        <div style="background-color:#0CB39F;border=3;font-size:medium;font-weight:bold">
+                                <br>
+         <p style="color:white;text-align:center;"> Hurrah.!!! Go celebrate a little, you were very productive today :-)   </p>
+                <br>
+                        </div>
+        {%endif%} 
+                
+             <form action="/track/" method="post">{% csrf_token %}
+             
+             
+             
+             <p> Your tasks for {{task.pub_date}} </p>
+    <table >
+       
+            <tr>
+                <th>
+                    Task Name
+                </th>
+                <th>
+                    Scheduled Poms
+                </th>
+                <th>
+                    Completed
+                </th>
+                 <th>
+                    Actual Poms
+                </th>
+            </tr>
+       
+        
+   
+       <tr >
+        <td>
+           {{ task.task1 }}
+        </td>
+        <td>
+            {{ task.schd_poms1}}
+        </td>
+      
+        <td>
+            {%if not task.completed1%}    
+                
+                
+            {{ form.completed1 }}
+            
+            {% else%}
+            {{task.completed1}}
+            {%endif %}
+        </td>
+            
+         <td>
+                 {%if not task.completed1%}
+                       {{ form.used_poms1 }} 
+                  {% else%}
+                {{task.used_poms1}}
+               {%endif %}
+        </td>
+         
+       </tr>
+         <tr >
+        <td>
+           {{ task.task2 }}
+        </td>
+        <td>
+            {{ task.schd_poms2}}
+        </td>
+      
+       <td>
+            {%if not task.completed2%}    
+                
+                
+            {{ form.completed2 }}
+            
+            {% else%}
+            {{task.completed2}}
+            {%endif %}
+        </td>
+            
+         <td>
+                 {%if not task.completed2%}
+                       {{ form.used_poms2 }} 
+                  {% else%}
+                {{task.used_poms2}}
+               {%endif %}
+        </td>
+       </tr>
+           <tr >
+        <td>
+           {{ task.task3 }}
+        </td>
+        <td>
+            {{ task.schd_poms3}}
+        </td>
+      
+       <td>
+            {%if not task.completed3%}    
+                
+                
+            {{ form.completed3 }}
+            
+            {% else%}
+            {{task.completed3}}
+            {%endif %}
+        </td>
+            
+         <td>
+                 {%if not task.completed3%}
+                       {{ form.used_poms3 }} 
+                  {% else%}
+                {{task.used_poms3}}
+               {%endif %}
+        </td>
+       </tr>
+       
+        
+    </table>
+    
+    {%if not task.completed1 or not task.completed2 or not task.completed3%}
+        <input type="submit" value="Submit">
+    {%endif%}
+      <input type="hidden" value="{{task.id}}" name="task_id">
+             </form>
+    {%else%}
+     <h2> No tasks created for the day </h2>
+    {%endif%}
+{% endblock %}

@@ -1,0 +1,84 @@
+{% extends "base_gv.html" %}
+
+{% block title %}Task List{% endblock %}
+
+{% block nav %}
+		<li ><a href="/track/">Track</a></li>
+		<li class="active"><a href="#">Celebrate</a></li>
+         	<li><a href="/contact/">Contact</a></li>
+		{% endblock %}
+
+{% block content %}
+        
+             <div style="background-color:#0CB39F;border=3;font-size:medium;font-weight:bold">
+                                <br>
+         <p style="color:white;text-align:center;"> Hurrah.!!! Its time to celebrate, you have completed all these in the last seven days.    </p>
+                <br>
+                        </div>
+        
+    
+   <br>
+    <br>
+   
+    <table >
+       
+            <tr>
+                <th>
+                    Task Name
+                </th>
+                <th>
+                    Scheduled Poms
+                </th>
+               
+                 <th>
+                    Actual Poms
+                </th>
+            </tr>
+       
+   {% for task in object_list %}      
+   {% if task.completed1%}
+       <tr >
+        <td>
+           {{ task.task1 }}
+        </td>
+        <td>
+            {{ task.schd_poms1}}
+        </td>
+        <td>
+           {{task.used_poms1}}
+              
+        </td>
+    {%endif%}
+    {% if task.completed2%}
+       <tr >
+        <td>
+           {{ task.task2 }}
+        </td>
+        <td>
+            {{ task.schd_poms2}}
+        </td>
+        <td>
+           {{task.used_poms2}}
+              
+        </td>
+    {%endif%}
+    {% if task.completed3%}
+       <tr >
+        <td>
+           {{ task.task3 }}
+        </td>
+        <td>
+            {{ task.schd_poms3}}
+        </td>
+        <td>
+           {{task.used_poms3}}
+              
+        </td>
+    {%endif%}
+       
+        
+   
+
+    {%endfor%}
+     </table>
+{% endblock %}
