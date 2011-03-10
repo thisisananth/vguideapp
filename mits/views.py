@@ -4,10 +4,13 @@ import datetime
 from django.shortcuts import render_to_response
 from mits.forms import DecideForm
 from mits.forms import TrackForm
+from mits.forms import LoginForm
 from mits.models import Task
 from django.core.context_processors import csrf
 from django.forms import ModelForm
 from django.core.exceptions import ObjectDoesNotExist
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib import auth
 
 def viewmit(request):
     return HttpResponse("Hello world")
@@ -93,7 +96,7 @@ def track(request):
                 return render_to_response('task_view.html', c)
     else:
 	if task == None:
-	    return (request)
+	    return decide(request)
 	else:
 	    c = {'task':task}
 	    c.update({'form':TrackForm(instance=task)})
@@ -101,9 +104,51 @@ def track(request):
 	    return render_to_response('task_view.html',c)
     
     
-
-
+def register(request):
+    c = {}
+    c.update(csrf(request))
     
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            new_user = form.save()
+	    c.update({'fromregister': True})
+	    return render_to_response('login.html',c)
+	else:
+	    c.update({'form': form})
+            return render_to_response('register.html', c)
+	
+    else:
+        form = UserCreationForm()
+	c.update({'form':form})
+    return render_to_response("register.html", c)
+
+def login(request):
+    c = {}
+    c.update(csrf(request))
+    
+    if request.method == 'POST':
+	form = LoginForm(request.POST)
+	if form.is_valid():
+	    cd = form.cleaned_data
+	    username = cd['username']
+	    password = cd['password']
+	    user = auth.authenticate(username=username, password=password)
+	    if user is not None and user.is_active:
+		# Correct password, and the user is marked "active"
+		auth.login(request, user)
+		# Redirect to a success page.
+		return HttpResponseRedirect("/decide/")
+	    else:
+		c.update({'form':form})
+		return render_to_response('login.html',c)
+	else:
+	    c.update({'form':LoginForm()})
+	    return render_to_response('login.html',c)
+		
+    else:
+        c.update({'form':LoginForm()})
+        return render_to_response('login.html',c)
     
     
     

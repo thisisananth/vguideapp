@@ -30,6 +30,8 @@ urlpatterns = patterns('',
                        
     ('^_ah/warmup$', 'djangoappengine.views.warmup'),
     ('^$', decide),
+     (r'^login/$', login),
+     (r'^register/$',register),
     ('^time/$', current_datetime),
     ('^decide/$', decide),
     ('^track/$', track),
