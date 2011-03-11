@@ -5,6 +5,7 @@ from mits.models import Task
 import operator
 import os
 from django.views.generic.simple import direct_to_template
+from django.http import HttpRequest
 
 handler500 = 'djangotoolbox.errorviews.server_error'
 # Uncomment the next two lines to enable the admin:
@@ -12,10 +13,6 @@ handler500 = 'djangotoolbox.errorviews.server_error'
 # admin.autodiscover()
 
 
-task_info = {
-    'queryset': Task.objects.all()[0:7],
-    'template_name' : 'celebrate_view.html',
-}
 
 
 urlpatterns = patterns('',
@@ -31,12 +28,13 @@ urlpatterns = patterns('',
     ('^_ah/warmup$', 'djangoappengine.views.warmup'),
     ('^$', decide),
      (r'^login/$', login),
+     (r'^logout/$',logout),
      (r'^register/$',register),
     ('^time/$', current_datetime),
     ('^decide/$', decide),
     ('^track/$', track),
-    (r'^celebrate/$', list_detail.object_list, task_info),
-    (r'^contact/$', direct_to_template, {
+    (r'^celebrate/$', celebrate),
+    (r'^contact/$', hidden_contact, {
         'template': 'contact.html'
     })
    

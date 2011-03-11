@@ -110,3 +110,5 @@ try:
                          MIDDLEWARE_CLASSES
 except ImportError:
     pass
+
+LOGIN_URL = '/login/'

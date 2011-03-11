@@ -6,6 +6,7 @@
 		<li class="active"><a href="#">Track</a></li>
 		<li><a href="/celebrate/">Celebrate</a></li>
 		<li><a href="/contact/">Contact</a></li>
+		<li><a href="/logout/">Logout</a></li>
 		{% endblock %}
 
 {% block content %}
@@ -19,15 +20,21 @@
             
             {% for error in form.errors%}
             {{error}}
-            {%endfor%}
+	 {%endfor%}
+   
+   
             
         </p>
+	
+	
                 {% endif %}
+		
+		
                 
                 {%if  task.completed1 and task.completed2 and task.completed3%}
                         <div style="background-color:#0CB39F;border=3;font-size:medium;font-weight:bold">
                                 <br>
-         <p style="color:white;text-align:center;"> Hurrah.!!! Go celebrate a little, you were very productive today :-)   </p>
+         <p style="color:white;text-align:center;">Hurrah.!!! Go celebrate a little, you were very productive today :-)   </p>
                 <br>
                         </div>
         {%endif%} 
@@ -36,7 +43,7 @@
              
              
              
-             <p> Your tasks for {{task.pub_date}} </p>
+             <p>Hey {{username}}, your tasks for {{task.pub_date}} </p>
     <table >
        
             <tr>

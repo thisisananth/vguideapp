@@ -1,8 +1,11 @@
 from django.db import models
+from django.contrib.auth.models import User
+
 
 # Create your models here.
 class Task(models.Model):
     pub_date = models.DateField('date',editable=False)
+    user = models.ForeignKey(User,editable=False) 
     task1 = models.CharField(max_length=200,editable=False)
     schd_poms1 = models.PositiveIntegerField('Scheduled Poms',editable=False)
     used_poms1= models.PositiveIntegerField('Acutal Poms Used')

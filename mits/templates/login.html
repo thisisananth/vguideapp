@@ -7,8 +7,8 @@
 		{% endblock %}
 {% block content %}
 
-  {% if form.errors %}
-    <p class="error">Sorry, that's not a valid username or password</p>
+  {% if error %}
+    <p style="color:red;text-align:center;">Sorry, that's not a valid username or password</p>
   {% endif %}
   
    {% if fromregister %}
