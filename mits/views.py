@@ -100,7 +100,7 @@ def track(request):
 		task1.completed3 = task.completed3
 		task1.used_poms3 = task.used_poms3
 	    task1.save()
-	    return render_to_response('task_view.html', c)
+	    return HttpResponseRedirect('/track/')
 	else:
                 c.update({'form': form})
 		

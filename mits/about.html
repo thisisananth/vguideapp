@@ -1,0 +1,40 @@
+{% extends "base_gv.html" %}
+
+
+{% block title %}About{% endblock %}
+
+{% block nav %}
+  {% if user.is_authenticated %}
+		<li ><a href="/track">Track</a></li>
+		<li><a href="/celebrate/">Celebrate</a></li>
+		<li><a href="/contact/">Contact</a></li>
+                <li><a href="/logout/">Logout</a></li>
+    {%else%}
+      <li><a href="/login/">Login</a></li>
+   {%endif%}
+                <li class="active"><a href="/about/">About</a></li>
+                
+		
+		{% endblock %}
+{% block content %}
+
+  <p>
+    <h3> What is Vguide </h3>
+    Vguide a productivity application which helps you get things done gently.<br>
+    <h4>Register: </h4> Register and login and you will be taken to the decide screen.
+    <h4>Decide:</h4> Enter the three most important tasks which you want to complete today.
+    For each task you enter the number of pomodoros ( Read <a href="http://www.pomodorotechnique.com/">Pomodoro Technique</a> )  generally,
+    half an hour blocks you need to complete your task.
+    <h4>Track:</h4>Then you can track it by visiting the site again and
+    entering the actual number of pomodoros to complete the task.
+    <h4>Celebrate:</h4>You can also view all the tasks you have completed and celebrate on the celebrate screen
+    
+    <h4> Planned Enhancements </h4>
+    There are lot of enhancements coming:<br>
+    1. Notifications<br>
+    2. Auto population  of tasks from previous incomplete tasks <br>
+    3. Reports<br>
+    <br>
+    Hope this virtual guide makes you more productive.
+  </p>
+  {% endblock %}

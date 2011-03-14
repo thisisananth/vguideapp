@@ -2,7 +2,7 @@
 from djangoappengine.settings_base import *
 
 import os
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (

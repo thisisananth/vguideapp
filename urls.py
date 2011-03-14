@@ -33,7 +33,9 @@ urlpatterns = patterns('',
     ('^time/$', current_datetime),
     ('^decide/$', decide),
     ('^track/$', track),
+    ('^about/$', direct_to_template,{'template': 'about.html'}),
     (r'^celebrate/$', celebrate),
+    
     (r'^contact/$', hidden_contact, {
         'template': 'contact.html'
     })
